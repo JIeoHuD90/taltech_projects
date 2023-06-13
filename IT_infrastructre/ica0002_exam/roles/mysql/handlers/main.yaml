@@ -1,0 +1,41 @@
+---
+- name: restart mysql
+  ansible.builtin.service:
+   name: mysql
+   state: restarted
+   
+- name: Restart MySQL source
+  community.mysql.mysql_replication:
+    mode: "{{ item }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  loop:
+    - stopreplica
+    - resetprimary
+  when: inventory_hostname == mysql_host
+
+- name: Restart MySQL replica
+  community.mysql.mysql_replication:
+    mode: "{{ item }}"
+    primary_host: "{{ mysql_host }}"
+    primary_user: "{{ replica_user }}"
+    primary_password: "{{ replica_sql_pass }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  loop:
+    - stopreplica
+    - changeprimary
+    - resetreplica
+    - startreplica
+  when: inventory_hostname != mysql_host
+  no_log: true
+  
+- name : restart 2
+  community.mysql.mysql_replication:
+    mode: "{{ item }}"
+  loop:
+    - stopreplica
+    - changeprimary
+    - resetreplica
+    - startreplica
+  when: inventory_hostname != mysql_host
+  
+

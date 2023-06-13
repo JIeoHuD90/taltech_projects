@@ -1,0 +1,25 @@
+---
+- name: install keepalived
+  apt:
+   pkg:
+    - keepalived
+
+- name: copy script
+  ansible.builtin.copy:
+   src: roles/keepalived/templates/script88
+   dest: /usr/local/bin/script88
+   mode: 700
+   owner: root
+  notify: 
+   - restart keepalived
+     
+- name: Template keepalived.conf
+  ansible.builtin.template:
+   src: roles/keepalived/templates/keepalived.conf
+   dest: /etc/keepalived/keepalived.conf
+  notify: 
+   - restart keepalived
+- name: conf keepalived
+  ansible.builtin.service:
+   name: keepalived
+   state: started

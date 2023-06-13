@@ -1,0 +1,1 @@
+ARGS="--web.telemetry-path=http://{{ ansible_host }}:{% if inventory_hostname in groups['web_servers'] %}{{ public_port1 }}{% else %}{{ public_port2}}{% endif %}/node-metrics"

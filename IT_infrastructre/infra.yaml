@@ -1,0 +1,68 @@
+---
+- name: Init
+  hosts:
+   - web_servers
+  gather_facts: yes
+  become: yes
+  roles: 
+   - init
+   
+- name: DNS server
+  gather_facts: yes
+  hosts:
+   - dns_servers
+  become: yes
+  roles:
+   - bind
+   - bind_exporter
+   
+- name: InfluxDB
+  hosts: influxdb
+  become: yes
+  gather_facts: yes
+  roles:
+   - influxdb
+   - influxdb_exporter
+   - pinger
+   - influxdb_backup
+- name: Prometheus+Grafana
+   - prometheus
+   - docker
+   - grafana
+
+- name: Database server
+  hosts:
+   - db_servers
+  become: yes
+  gather_facts: yes
+  roles:
+   - mysql
+   - nginx
+   - mysql_backup
+   - node_exporter
+   - nginx_exporter
+   - rsyslog
+   - backup
+   - mysql_exporter
+
+- name: Apps
+  hosts:
+   - db_servers
+   - web_servers
+  become: yes
+  roles:
+   - docker
+   - agama
+- name: Keepalive and HA proxy
+  gather_facts: yes
+  hosts:
+   - db_servers
+   - web_servers
+  become: yes
+  roles:
+   - keepalived
+   - haproxy
+   - haproxy_exporter
+   - keepalived_exporter
+
+

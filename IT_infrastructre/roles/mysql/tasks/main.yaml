@@ -1,0 +1,59 @@
+---
+- name: Install mysql
+  apt:
+   pkg:
+    - mysql-server
+    - python3-pymysql
+- name: mysql service start and conf
+  ansible.builtin.service:
+   name: mysql
+   enabled: yes
+   state: started
+- name: Copy override
+  ansible.builtin.template:
+   src: roles/mysql/files/override.cnf
+   dest: /etc/mysql/mysql.conf.d/
+  notify:
+   - restart mysql
+- name: MySQL database
+  community.mysql.mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+- name: MySQL user
+  community.mysql.mysql_user:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    host: "%"
+    priv: "{{ mysql_database }}.*:ALL"
+  no_log: true
+
+- name: Create user exporter
+  community.mysql.mysql_user:
+    name: exporter
+    password: "{{ mysql_exporter_pass }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: 
+     '*.*': 'PROCESS,REPLICATION CLIENT,SELECT'
+  no_log: true
+  
+- name: MySQL user
+  community.mysql.mysql_user:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: replication
+    password: "{{ mysql_exporter_pass }}"
+    host: "%"
+    priv: 
+     '*.*': 'REPLICATION SLAVE'
+  no_log: true
+  
+- name: mysql replica read only mode on
+  community.mysql.mysql_variables:
+   variable: read_only
+   value: 'ON'
+   mode: persist
+   login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname != mysql_host
+  notify:
+   - Reset MySQL source
+   - Reset MySQL replica    

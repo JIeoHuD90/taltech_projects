@@ -1,0 +1,29 @@
+---
+- name: nginx
+  apt:
+   name: nginx
+   
+- name: copy html
+  ansible.builtin.copy:
+    src: roles/nginx/files/index.html
+    dest: /var/www/html/
+    
+- name: copy default
+  ansible.builtin.template:
+   src: roles/nginx/templates/default
+   dest: /etc/nginx/sites-enabled/default 
+  notify:
+   - restart nginx
+- name: nginx service start and conf
+  ansible.builtin.service:
+   name: nginx
+   enabled: yes
+   state: started
+- name: copy default
+  ansible.builtin.template:
+   src: roles/nginx/templates/exporter
+   dest: /etc/nginx/sites-enabled/exporter 
+  notify:
+   - restart nginx
+   - restart prometheus-nginx-exporter
+

@@ -1,0 +1,22 @@
+---
+- name: Install prometheus
+  apt:
+   pkg:
+    - prometheus
+- name: prometheus service start and conf
+  ansible.builtin.service:
+   name: prometheus
+   enabled: yes
+   state: started
+- name: Conf prometheus
+  ansible.builtin.template:
+   src: roles/prometheus/templates/prometheus.yml
+   dest: /etc/prometheus/prometheus.yml
+  notify:
+   - Restart prometheus
+- name: copy prometheus service conf 
+  ansible.builtin.template:
+   src: roles/nginx/templates/prometheus
+   dest: /etc/default/prometheus
+  notify:
+   - Restart prometheus

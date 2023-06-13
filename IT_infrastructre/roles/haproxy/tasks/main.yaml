@@ -1,0 +1,12 @@
+---
+- name: install haproxy
+  apt:
+   pkg:
+    - haproxy
+
+- name: Template haproxy.cfg
+  ansible.builtin.template:
+   src: roles/haproxy/templates/haproxy.cfg
+   dest: /etc/haproxy/haproxy.cfg
+  notify: 
+   - restart haproxy

@@ -1,0 +1,23 @@
+---
+
+- name: copy exporter 
+  ansible.builtin.copy:
+   src: roles/keepalived_exporter/templates/keepalived-exporter
+   dest: /usr/local/bin/keepalived-exporter
+   mode: '777'
+- name: copy service 
+  ansible.builtin.copy:
+   src: roles/keepalived_exporter/templates/keepalived-exporter.service
+   dest: /etc/systemd/system/keepalived-exporter.service
+
+
+
+- name: daemon reload
+  ansible.builtin.systemd:
+    daemon_reload: yes
+    
+- name: pinger service start and conf
+  ansible.builtin.service:
+   name: keepalived-exporter
+   enabled: yes
+   state: started

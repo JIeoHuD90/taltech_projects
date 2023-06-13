@@ -1,0 +1,15 @@
+$TTL	604800
+42.168.192.in-addr.arpa.	IN	SOA	LeonidVagulin-1.deez.lv. leonid.deez.lv. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+{% for vm in groups['dns_servers'] %}
+42.168.192.in-addr.arpa.	IN	NS	{{ vm }}.{{ domain }}.
+{% endfor %}
+{% for vm in groups['all'] %}
+{{ (hostvars[vm]['ansible_default_ipv4']['address']| split('.'))[3] }}	IN	PTR	{{ vm }}.{{ domain }}.
+{% endfor %}
+

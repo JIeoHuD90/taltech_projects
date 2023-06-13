@@ -1,0 +1,4 @@
+100 * (1 - ((avg_over_time(node_memory_MemFree[24h]) + avg_over_time(node_memory_Cached[24h]) + avg_over_time(node_memory_Buffers[24h])) / avg_over_time(node_memory_MemTotal[24h])))
+
+
+100 - (avg by (instance) (rate(node_cpu{job="node",mode="idle"}[5m])) * 100)

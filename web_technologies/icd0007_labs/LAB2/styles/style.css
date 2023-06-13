@@ -1,0 +1,149 @@
+@charset "utf-8";
+@import "https://enos.itcollege.ee/~levagu/ICD0007_LAB2/styles/main.css";
+body {
+    background-image: url("https://enos.itcollege.ee/~levagu/ICD0007_LAB2/img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-color: #19A431;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    height: 150px;
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))
+}
+
+nav {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    width: 600px;
+    top: 120px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    background-color: #8CFF6F;
+    height: 30px;
+}
+
+li {
+    float: left;
+    padding: 2px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-right: 10px;
+    height: 30px;
+    background-color: #CDFFAC;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF956F;
+}
+
+h1,
+h2 {
+    color: #FFA7D6;
+}
+
+h1 {
+    font-size: 26px;
+    height: 50px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #ff0000;
+}
+
+h2 {
+    font-size: 20px;
+    height: 50px;
+    text-shadow: 2px 2px #ff0000;
+}
+
+article {
+    padding: 20px;
+    color: #FF956F;
+}
+
+#flight-statuses {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#flight-statuses tr {
+    height: 40px;
+    color: #000;
+}
+
+#flight-statuses tr:nth-child(even) {
+    background-color: #CCC;
+}
+
+#flight-statuses tr:nth-child(odd) {
+    background-color: #FFF;
+}
+
+#flight-statuses tr:first-child {
+    filter: invert(1);
+}
+
+#flight-statuses th,
+td {
+    padding: 10px;
+}
+
+#flight-statuses tr:hover td {
+    background: #dfdf1d !important;
+    border-top: 3px solid #000;
+    border-bottom: 3px solid #000;
+}
+
+.departed:after {
+    content: '\2708';
+}
+
+.departed {
+    color: #19A431;
+}
+
+.cancelled {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+@media print {
+    header {
+        visibility: hidden;
+    }
+}
+
+@media print {
+    article,
+    h1,
+    h2,
+    table,
+    td {
+        color: black !important;
+        text-shadow: none;
+    }
+}
+
+@media print {
+    .info,
+    .departed,
+    .cancelled {
+        font-weight: bold;
+    }
+}

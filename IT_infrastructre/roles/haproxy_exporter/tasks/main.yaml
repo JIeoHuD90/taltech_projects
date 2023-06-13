@@ -1,0 +1,16 @@
+---
+- name: haproxy exporter
+  apt:
+   pkg:
+    - prometheus-haproxy-exporter
+- name: copy conf for ha-exporter
+  ansible.builtin.template:
+   src: roles/haproxy_exporter/templates/prometheus-haproxy-exporter
+   dest: /etc/default/prometheus-haproxy-exporter
+  notify: restart prometheus-haproxy-exporter
+
+- name: conf prometheus-haproxy-exporter
+  ansible.builtin.service:
+   name: prometheus-haproxy-exporter
+   enabled: yes
+   state: started

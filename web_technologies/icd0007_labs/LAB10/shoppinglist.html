@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <script src="script2.js"></script>
+    <title>LAB10</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body onload="checkCookie()">
+    <h1 id="greeting">:</h1>
+    <input type='button' onclick="logout()" value="Logout">
+
+    <form id='list'>
+        <label for="product">Product name:</label><br>
+        <input type="text" name="product" id="product" placeholder="Product name" required>
+        <label for="quant"> Quantity:</label><br>
+        <input type="number" name="quant" id="quant" placeholder="Quantity" min='1' required>
+        <input type='button' onclick="storage()" value="Add">
+    </form>
+    <table id="growing-table">
+        <tr>
+            <th>No.</th>
+            <th>Product</th>
+            <th>Quantity</th>
+        </tr>
+    </table>
+</body>
+
+</html>

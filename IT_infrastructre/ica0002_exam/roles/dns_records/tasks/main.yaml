@@ -1,0 +1,34 @@
+---
+- name: add CNAME 
+  when: inventory_hostname in groups['dns_master']
+  nsupdate:
+   key_name: "nsupdate.key"
+   key_algorithm: "hmac-sha256"
+   key_secret: "{{ ns_secret }}"
+   server: "localhost"
+   zone: "{{ domain }}"
+   record: "{{ item.key }}"
+   type: "CNAME"
+   value: "{{ item.value }}"
+  loop: "{{ dns_cname_records | dict2items }}"
+  run_once: True 
+  notify:
+   - restart bind
+   
+
+- name: add A records 
+  when: inventory_hostname in groups['dns_master']
+  nsupdate:
+   key_name: "nsupdate.key"
+   key_algorithm: "hmac-sha256"
+   key_secret: "{{ ns_secret }}"
+   server: "localhost"
+   zone: "{{ domain }}"
+   record: "{{ item.key }}"
+   type: "A"
+   value: "{{ item.value }}"
+  loop: "{{ dns_a_records | dict2items }}"
+  run_once: True 
+  notify:
+   - restart bind
+   - restart pinger

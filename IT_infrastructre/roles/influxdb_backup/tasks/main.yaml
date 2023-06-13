@@ -1,0 +1,29 @@
+---
+- name: Create a directory for influxdb backup
+  ansible.builtin.file:
+    path: /home/backup/influxdb
+    state: directory
+    owner: backup
+    group: backup
+- name: Install   python3-pip
+  apt:
+   pkg:
+    - python3-pip
+
+- name: Install influxdb for pip
+  pip:
+    name: influxdb
+- name: create user backup
+  community.general.influxdb_user:
+    user_name: backup
+    user_password: "{{ mysql_exporter_pass }}"
+    grants:
+      - database: 'latency'
+        privilege: 'ALL'
+      - database: 'telegraf'
+        privilege: 'ALL'
+- name: crontab update influxdb_backup
+  ansible.builtin.copy:
+   src: roles/influxdb_backup/files/influxdb-backup
+   dest: /etc/cron.d/influxdb-backup
+   force: yes

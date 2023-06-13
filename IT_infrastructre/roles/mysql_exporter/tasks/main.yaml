@@ -1,0 +1,34 @@
+---
+- name: Install prometheus-mysqld-exporter
+  apt:
+   pkg:
+    - prometheus-mysqld-exporter
+- name: copy my.cnf
+  ansible.builtin.template:
+   src: roles/mysql_exporter/templates/my.cnf
+   dest: /var/lib/prometheus/.my.cnf
+  no_log: true
+  notify:
+   - restart prometheus-mysqld-exporter
+- name: copy args for slave metrics
+  ansible.builtin.copy:
+   src: roles/mysql_exporter/files/prometheus-mysqld-exporter
+   dest: /etc/default/prometheus-mysqld-exporter
+  notify:
+   - restart prometheus-mysqld-exporter
+
+- name: Check if prometheus-mysql-exporter is up to date
+  apt: name=prometheus-mysqld-exporter state=latest
+  register: prom_exporter_installed
+
+- name: 
+  pause:
+    seconds: 10 
+  when: prom_exporter_installed.changed
+  
+
+- name: conf prometheus-mysqld-exporter
+  ansible.builtin.service:
+   name: prometheus-mysqld-exporter
+   enabled: yes
+   state: started

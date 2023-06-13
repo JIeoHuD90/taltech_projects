@@ -1,0 +1,375 @@
+git git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03.git
+git clone git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03.git
+git config --global user.name "levagu"
+git config --global user.email "levagu@taltech.ee"
+touch README.md
+-ls
+ls
+mv README.md icd0007_lab_03
+cd icd0007_lab_03
+ls
+git add -A
+git commit -m "init README.md"
+git push
+git tag -a v0.0 -m "base version"
+git push origin v0.0
+git checkout -b b_test
+git push -u origin b_test
+touch index.html
+git add -A
+git commit -m "init index.html"
+git push
+ls -1
+git checkout master
+ls -1
+git checkout master
+vim README.md
+git add -A
+git commit -m "title, author"
+git push
+git checkout master
+git branch -d b_html
+git branch -d b_test
+git pysh -u origin :b_test
+git push -u origin :b_test
+git branch -vv
+git reflog
+git checkout -b b_test f61584b
+ls -1
+git push -u origin b_test
+git checkouy b_test
+git checkout b_test
+touch style.css
+git add -A
+git commit -m "style.css"
+git push
+git rever --no-edit HEAD
+git revert --no-edit HEAD
+git commit -m "Revert: remove style.css"
+git push
+git checkout b_test
+git reabse master
+git rebase master
+git pull
+git log --graph --oneline
+git push
+git checkot master
+git checkout master
+git merge b_test
+git push
+git log --graph --oneline
+git tag -a v0.1 "HTML only"
+git tag -a v0.1 -m "HTML only"
+git push origin v0.1
+git checkout master
+git checkout -b b_css
+git push -u origin b_css
+mkdir styles
+touch styles/main.css
+git add -A
+git commit -m "init main.css"
+git push
+vim README.md
+git add -A
+git commit -m "README: with CSS"
+git push
+git checkout master
+vir README.md
+vim README.md
+git add -A
+git commit -m "README: with HTML"
+git push
+git checkout b_css
+git rebase master
+git diff
+git mergetool --tool=vimdiff
+git add README.md
+git rebase --continue
+git pull
+vim README.md
+git add README.md
+git commit -m "README: resolved"
+git push
+git checkout master
+git merge origin/b_css
+git push
+git tag -a v1.0 -m "HTML+CSS"
+git push origin v1.0
+git log --graph --oneline
+history -w
+cat ~/.ssh/id_ed25519.pub
+git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03.git
+git git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03.git
+git clone git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03.git
+git config --global user.name "levagu"
+git config --global user.email "levagu@taltech.ee"
+touch README.md
+-ls
+ls
+mv README.md icd0007_lab_03
+cd icd0007_lab_03
+ls
+git add -A
+git commit -m "init README.md"
+git push
+git tag -a v0.0 -m "base version"
+git push origin v0.0
+git checkout -b b_test
+git push -u origin b_test
+touch index.html
+git add -A
+git commit -m "init index.html"
+git push
+ls -1
+git checkout master
+ls -1
+git checkout master
+vim README.md
+git add -A
+git commit -m "title, author"
+git push
+git checkout master
+git branch -d b_html
+git branch -d b_test
+git pysh -u origin :b_test
+git push -u origin :b_test
+git branch -vv
+git reflog
+git checkout -b b_test f61584b
+ls -1
+git push -u origin b_test
+git checkouy b_test
+git checkout b_test
+touch style.css
+git add -A
+git commit -m "style.css"
+git push
+git rever --no-edit HEAD
+git revert --no-edit HEAD
+git commit -m "Revert: remove style.css"
+git push
+git checkout b_test
+git reabse master
+git rebase master
+git pull
+git log --graph --oneline
+git push
+git checkot master
+git checkout master
+git merge b_test
+git push
+git log --graph --oneline
+git tag -a v0.1 "HTML only"
+git tag -a v0.1 -m "HTML only"
+git push origin v0.1
+git checkout master
+git checkout -b b_css
+git push -u origin b_css
+mkdir styles
+touch styles/main.css
+git add -A
+git commit -m "init main.css"
+git push
+vim README.md
+git add -A
+git commit -m "README: with CSS"
+git push
+git checkout master
+vir README.md
+vim README.md
+git add -A
+git commit -m "README: with HTML"
+git push
+git checkout b_css
+git rebase master
+git diff
+git mergetool --tool=vimdiff
+git add README.md
+git rebase --continue
+git pull
+vim README.md
+git add README.md
+git commit -m "README: resolved"
+git push
+git checkout master
+git merge origin/b_css
+git push
+git tag -a v1.0 -m "HTML+CSS"
+git push origin v1.0
+git log --graph --oneline
+history -w
+git add -A
+git commit -m "submitting history.txt"
+git push
+exit
+ssh-keygen -t ed25519 -C "enos.itcollege.ee" # generate an ssh key
+cat ~/.ssh/id_ed25519.pub
+git clone git@gitlab.cs.ttu.ee:levagu/icd0007_lab3_levagu.git
+git config --global user.name "levagu"
+git config --global user.email "levagu@taltech.ee"
+git clone git@gitlab.cs.ttu.ee:levagu/icd0007_lab3_levagu.git
+php -v
+exit
+ls
+cd public_html/
+mkdir ICD007_LAB4
+cd ICD00_LAB4
+ls
+cd ICD007_LAB4
+cd
+ls
+mkdir ICD0007_Project
+ls
+cd ICD0007_Project/
+git clone https://gitlab.cs.ttu.ee/dmkrug/icd0007_teamproject.git
+cd
+ls
+cd public_html/
+git clone https://gitlab.cs.ttu.ee/dmkrug/icd0007_teamproject.git
+ls
+cd public_html/
+cd icd0007_teamproject/
+git add -A
+git commit -m "initial css and index.html code"
+git push
+cd public_html/icd0007_teamproject/
+git add -A
+git commit -m "agents.css and agents.html first update"
+git push
+cd public_html/icd0007_teamproject/
+git add -A
+git commit -m "agents.html and index.html relative links fix"
+git push
+cd
+cd public_html/
+cd icd0007_teamproject/
+git add -A
+git commit -m "main.css and index html tweaks"
+git push
+nano index.html 
+cd
+cd public_html/icd0007_teamproject/
+cd
+cd public_html/
+git clone https://gitlab.cs.ttu.ee/dmkrug/icd0007_teamproject.git
+git pull https://gitlab.cs.ttu.ee/dmkrug/icd0007_teamproject.git
+git clone https://gitlab.cs.ttu.ee/dmkrug/icd0007_teamproject.git
+git commit -m "links fix in .css files"
+git add -A
+cd icd0007_teamproject/
+git add -A
+git commit -m "links fix in .css files"
+git push
+nano README.md 
+git add -A
+git commit -m "updated README"
+git push
+cd public_html/
+git clone https://gitlab.cs.ttu.ee/dmkrug/icd0007_teamproject.git
+git clone git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03_levagu.git
+git clone git@gitlab.cs.ttu.ee/levagu/icd0007_lab_03_levagu.git
+git clone git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03_levagu.git
+git clone git@gitlab.cs.ttu.ee:levagu/icd0007_lab_03_levagu.git
+cd icd0007_lab_03_levagu/
+git config --global user.name "Leonid"
+git config --global user.email "levagu@taltech.ee"
+touch README.md
+git add -A
+git commit -m "init README.md"
+git push
+git tag -a v0.0 "base version"
+git tag -a v0.0 -m "base version"
+git push origin v0.0
+git checkout -b b_test
+git push -u origin b_test
+touch index.html
+git add -A
+-git commit -n "init index.html"
+git commit -n "init index.html"
+git commit -m "init index.html"
+git push
+ls -1
+git checkout master
+ls -1
+git checkout -b b_html
+git push -u origin b_html
+touch index.html
+git add -A
+git commit -m "init index.html"
+git push
+ls -1
+git checkout master
+vim README.md
+git add -A
+git commit -m "title, author"
+git push
+git checkout master
+git branch -d b_html
+git push -u origin :b_html
+git branch -vv
+git rreflog
+git reflog
+git checkout -b b_html eec947b
+ls 1
+ls -1
+git push -u origin b_html
+git checkout b_html
+touch style.css
+git add -A
+git commit -m "style.css in wrong branch"
+git push
+git rever --no-edit HEAD
+git revert --no-edit HEAD
+git commit -m "Revert: remove style.css"
+git push
+git checkout b_html
+git rebase master
+git pull
+git log --graoh --oneline
+git log --graph --oneline
+git push
+git checkout master
+git merge b_html
+git push
+git log --graph --oneline
+git tag -a v0.1 -m "HTML only"
+git push origin v0.1
+git checkout master
+git checkout -b b_css
+git push -u origin b_css
+mkdir styles
+touch styles/main.css
+git add -A
+git commit -m "init main.css"
+git push
+vim README.md
+git -add -A
+git commit -m
+git push
+git add -A
+git commit -m "README: with CSS"
+git push
+git checkout master
+vim README.md 
+git add -A
+git commit -m "README: with HTML"
+git push
+git checkout b_css
+git rebase master
+git diff
+git mergetool --tool=vimdiff
+git add README.md
+git rebase --continue
+git pull
+vim README.md
+git checkout master
+git add README.md
+git commit -m "README: resolved"
+git push
+git checkout master
+git merge origin/b_css
+git push
+git tag -a v1.0 -m "HTML+CSS"
+git push origin v1.0
+git log --graph --oneline
+history -w

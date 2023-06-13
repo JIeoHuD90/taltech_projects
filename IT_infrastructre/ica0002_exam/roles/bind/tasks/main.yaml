@@ -1,0 +1,61 @@
+---
+- name: install bind9
+  apt:
+   pkg:
+    - bind9
+    - python3-dnspython
+- name: bind9 service start and conf
+  ansible.builtin.service:
+   name: bind9
+   enabled: yes
+   state: started
+
+- name: Template named.conf.options
+  ansible.builtin.template:
+   src: roles/bind/templates/named.conf.options
+   dest: /etc/bind/
+  no_log: true
+  notify: 
+   - Restart bind
+   
+- name: Copy db.deez
+  when: inventory_hostname in groups['dns_master']
+  ansible.builtin.template:
+   force: no
+   src: roles/bind/templates/db.deez
+   dest: /var/cache/bind/db.deez
+  notify: 
+   - Restart bind
+   
+- name: Copy db.domain.reverse
+  when: inventory_hostname in groups['dns_master']
+  ansible.builtin.template:
+   force: no
+   src: roles/bind/templates/db.domain.reverse
+   dest: /var/cache/bind/db.reverse
+  notify: 
+   - Restart bind
+   
+- name: Copy local.conf
+  ansible.builtin.template:
+   src: roles/bind/templates/named.conf.local
+   dest: /etc/bind/named.conf.local
+  notify: 
+   - Restart bind
+
+- name: shutdown systemd-resolved
+  ansible.builtin.service:
+   name: systemd-resolved
+   state: stopped
+   enabled: no
+
+  
+- name: Template resolv.conf
+  ansible.builtin.template:
+   src: roles/bind/templates/resolv.conf
+   dest: /etc/resolv.conf
+  notify: 
+   - Restart bind
+   
+   
+   

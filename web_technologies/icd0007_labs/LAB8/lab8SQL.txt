@@ -1,0 +1,29 @@
+create table semesters_210731 (ID int primary key NOT NULL AUTO_INCREMENT,semester_name varchar(20) UNIQUE);
+
+create table declarations_210731 (ID int primary key NOT NULL AUTO_INCREMENT,course_ID int,semesters_ID int,student_code varchar(10),student_name varchar(45),remarks varchar(125));
+
+create table test(ID int primary key NOT NULL AUTO_INCREMENT,semester_name varchar(20) UNIQUE);
+
+INSERT INTO semesters_210731(semester_name)  VALUES('autumn-spring');
+
+INSERT INTO declarations_210731(courses_ID,semesters_ID,student_code,student_name,remarks)  VALUES('225','2','33333','Test Student3','4');
+
+CREATE TABLE courses_210731 LIKE courses;
+
+INSERT INTO courses_210731 SELECT*FROM courses;
+
+ALTER TABLE courses_210731 MODIFY COLUMN old_credits DOUBLE;
+
+UPDATE courses_210731 SET  old_credits = 1.5 * ects_credits;
+
+SELECT*FROM courses_210731 WHERE course_name LIKE '%programming%' AND Semesters_ID=2;
+
+SELECT ects_credits FROM courses_210731 WHERE course_code='ICD0007';
+
+SELECT course_code,course_name,ects_credits,old_credits FROM courses_210731 WHERE ects_credits>=5;
+
+SELECT student_name, student_code, course_code, ects_credits     FROM declarations_210731 D INNER JOIN courses C ON D.courses_ID=C.ID     ORDER BY ects_credits DESC, student_name ASC;
+
+SELECT student_name, student_code, D.semesters_ID, SUM(ects_credits)	FROM declarations_210731 D INNER JOIN courses C ON D.courses_ID=C.ID	GROUP BY student_name, student_code, D.semesters_ID  ORDER BY student_name ASC, D.semesters_ID ASC;
+
+SELECT COUNT(courses_ID) FROM declarations_210731 WHERE semesters_ID = 1;

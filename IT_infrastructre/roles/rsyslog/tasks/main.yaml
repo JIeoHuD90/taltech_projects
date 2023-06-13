@@ -1,0 +1,7 @@
+---
+- name: copy pinger.service
+  ansible.builtin.copy:
+   src: roles/rsyslog/templates/rsyslog.conf
+   dest: /etc/rsyslog.conf
+  notify: 
+   - restart rsyslog

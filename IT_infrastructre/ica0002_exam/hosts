@@ -1,0 +1,45 @@
+LeonidVagulin-1 ansible_port=16822 
+LeonidVagulin-2 ansible_port=7522
+LeonidVagulin-3 ansible_port=5922
+
+[db_servers]
+LeonidVagulin-3
+LeonidVagulin-2
+
+[mysql_host]
+LeonidVagulin-2
+
+[haproxy]
+LeonidVagulin-3
+LeonidVagulin-2
+
+[influxdb]
+LeonidVagulin-1
+
+[web_servers]
+LeonidVagulin-3
+LeonidVagulin-2
+
+[grafana]
+LeonidVagulin-1
+
+[prometheus]
+LeonidVagulin-1
+
+[dns_master]
+LeonidVagulin-1
+
+[dns_slaves]
+LeonidVagulin-2
+LeonidVagulin-3
+
+[dns_servers:children]
+dns_master
+dns_slaves
+
+[all:vars]
+public_port1=8922
+public_port2=12122
+ansible_host=193.40.156.86
+ansible_python_interpreter=python3
+ansible_user=ubuntu

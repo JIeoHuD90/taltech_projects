@@ -1,0 +1,18 @@
+---
+- name: Add Roman
+  ansible.builtin.user:
+   name: roman
+   role: users
+- name: add ssh
+  ansible.posix.authorized_key:
+   user: roman
+   key: https://github.com/romankuchin.keys
+    
+- name: Add Juri
+  ansible.builtin.user:
+   name: juri
+   role: users
+- name: add ssh
+  ansible.posix.authorized_key:
+   user: juri
+   key: https://github.com/hudolejev.keys

@@ -1,0 +1,23 @@
+---
+- name: Update APT cache
+  ansible.builtin.apt:
+    cache_valid_time: 86400
+    
+- name: Install iptables-persistent
+  apt:
+   name: 
+    - iptables-persistent
+    
+- name: Copy iptables.mangle
+  ansible.builtin.copy:
+   src: roles/init/templates/iptables.mangle
+   dest: /var/local/iptables.mangle
+- name: Copy /etc/iptables/rules.v4
+  ansible.builtin.copy:
+   src: roles/init/templates/iptables.mangle
+   dest: /etc/iptables/rules.v4
+- name: Fix for ssl
+  community.general.iptables_state:
+   path: /var/local/iptables.mangle
+   state: restored
+   table: mangle

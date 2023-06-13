@@ -1,0 +1,18 @@
+- name: Install docker
+  apt:
+   name: 
+    - docker.io
+    - python3-docker
+    
+
+    
+- name: docker service start and conf
+  ansible.builtin.service:
+   name: docker
+   enabled: yes
+   state: started
+
+- name: Log into DockerHub
+  community.docker.docker_login:
+    username: "{{ docker_login }}"
+    password: "{{ docker_pass }}"

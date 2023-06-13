@@ -1,0 +1,11 @@
+---
+- name: restart bind
+  ansible.builtin.service:
+   name: bind9
+   state: restarted
+
+- name: restart pinger
+  ansible.builtin.service:
+   name: pinger.service
+   state: restarted
+

@@ -1,0 +1,46 @@
+---
+- name: Create folders for grafana
+  ansible.builtin.file:
+   name: "/opt/grafana/provisioning/{{ item }}"
+   recurse: yes
+  loop:
+    - dashboards
+    - datasources
+- name: grafana-server template confs
+  ansible.builtin.template:
+   src: roles/grafana/templates/grafana.ini
+   dest: /opt/grafana/grafana.ini
+  no_log: true
+- name: grafana-server datasources confs
+  ansible.builtin.template:
+   src: datasource.yaml
+   dest: /opt/grafana/provisioning/datasources/default.yaml
+
+- name: grafana-server json confs
+  ansible.builtin.template:
+   src: roles/grafana/templates/dashboards.yaml
+   dest: /opt/grafana/provisioning/dashboards/default.yaml
+
+- name: grafana-server jsonfile confs
+  ansible.builtin.copy:
+   src: roles/grafana/files/main.json
+   dest: /opt/grafana/provisioning/dashboards/main.json
+- name: grafana-server jsonfile confs
+  ansible.builtin.copy:
+   src: roles/grafana/files/mysql.json
+   dest: /opt/grafana/provisioning/dashboards/mysql.json
+- name: grafana-server jsonfile confs
+  ansible.builtin.copy:
+   src: roles/grafana/files/syslog.json
+   dest: /opt/grafana/provisioning/dashboards/syslog.json
+
+- name: install and run grafana in docker
+  community.docker.docker_container:
+   name: grafana
+   image: grafana/grafana
+   state: started
+   restart_policy: always
+   container_default_behavior: no_defaults
+   published_ports: "{{ grafana_port }}:3000"
+   volumes: /opt/grafana:/etc/grafana
+   

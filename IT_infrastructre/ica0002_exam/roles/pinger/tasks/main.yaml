@@ -1,0 +1,45 @@
+---
+- name: Add pinger user
+  ansible.builtin.user:
+   name: pinger
+   role: user
+
+- name: Install  fping
+  apt:
+   pkg:
+    - fping
+- name: Create /etc/pinger
+  ansible.builtin.file:
+   path: /etc/pinger
+   owner: pinger
+   state: directory
+
+- name: copy pinger.conf
+  ansible.builtin.copy:
+   src: roles/pinger/files/pinger.conf
+   dest: /etc/pinger/pinger.conf
+   
+- name: copy pinger.sh
+  ansible.builtin.copy:
+   src: roles/pinger/files/pinger.sh
+   dest: /usr/local/bin/pinger
+   owner: pinger
+   group: pinger
+   mode: '777'
+
+- name: copy pinger.service
+  ansible.builtin.copy:
+   src: roles/pinger/files/pinger.service
+   dest: /etc/systemd/system/pinger.service
+
+- name: daemon reload
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
+- name: pinger service start and conf
+  ansible.builtin.service:
+   name: pinger
+   enabled: yes
+   state: started
+    
+    

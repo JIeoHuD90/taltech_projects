@@ -1,0 +1,10 @@
+- name: Install prometheus-nginx-exporter
+  apt:
+   pkg:
+    - prometheus-nginx-exporter
+- name: conf prometheus-nginx-exporter
+  ansible.builtin.service:
+   name: prometheus-nginx-exporter
+   enabled: yes
+   state: started
+  notify: restart prometheus-nginx-exporter

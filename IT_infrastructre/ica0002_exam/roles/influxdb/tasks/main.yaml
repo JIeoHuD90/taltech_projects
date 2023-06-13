@@ -1,0 +1,29 @@
+---
+- apt_key:
+   url: https://repos.influxdata.com/influxdb.key
+- apt_repository:
+   repo: deb https://repos.influxdata.com/ubuntu focal stable
+
+- name: Install  influx and telegraf
+  apt:
+   pkg:
+    - influxdb
+    - telegraf
+- name: influx service start and conf
+  ansible.builtin.service:
+   name: influxdb
+   enabled: yes
+   state: started
+- name: config telegraf to recieve rsyslog and send to influx
+  ansible.builtin.copy:
+   src: roles/influxdb/templates/telegraf.config
+   dest: /etc/telegraf/telegraf.conf
+   force: yes
+  notify:
+   - restart telegraf
+- name: config influxdb logging msg
+  ansible.builtin.copy:
+   src: roles/influxdb/templates/influxdb.conf
+   dest: /etc/telegraf/influxdb.conf
+  notify:
+   - restart influxdb

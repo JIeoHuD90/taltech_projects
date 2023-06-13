@@ -1,0 +1,5 @@
+{% if inventory_hostname != mysql_host -%}
+19 17 * * * backup  mysqldump agama > /home/backup/mysql/agama.sql
+30 17 * * * backup  duplicity --no-encryption full /home/backup/mysql/ rsync://LeonidVagulin@backup-server.deez.lv//home/LeonidVagulin/
+35 17 * * * backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://LeonidVagulin@backup-server.deez.lv//home/LeonidVagulin/
+{% endif -%}
